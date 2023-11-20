@@ -1,44 +1,54 @@
 #include <WiFi.h>
+#include <ESPAsyncWebServer.h>
 
 const char *ssid = "BREGOLI";
 const char *password = "6b61746531323036";
 
-WiFiServer server(80);
+AsyncWebServer server(80);
+AsyncWebSocket ws("/ws");
+
+void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventType type,
+               void *arg, uint8_t *data, size_t len)
+{
+    if (type == WS_EVT_CONNECT)
+    {
+        Serial.println("Cliente WebSocket conectado");
+        client->text("Bem-vindo ao servidor WebSocket ESP32!");
+    }
+    else if (type == WS_EVT_DISCONNECT)
+    {
+        Serial.println("Cliente WebSocket desconectado");
+    }
+    else if (type == WS_EVT_DATA)
+    {
+        data[len] = 0;
+        Serial.printf("Dados recebidos: %s\n", data);
+    }
+}
 
 void setup()
 {
     Serial.begin(9600);
+
     WiFi.begin(ssid, password);
 
     while (WiFi.status() != WL_CONNECTED)
     {
-        delay(500);
-        Serial.println("Connecting to WiFi...");
+        delay(1000);
+        Serial.println("Conectando ao WiFi...");
     }
 
-    Serial.println("Connected to WiFi");
+    Serial.println("Conectado ao WiFi");
+    Serial.print("Endereço IP: ");
+    Serial.println(WiFi.localIP());
+
+    ws.onEvent(onWsEvent);
+    server.addHandler(&ws);
     server.begin();
 }
 
 void loop()
 {
-    WiFiClient client = server.available();
-
-    if (client)
-    {
-        while (client.connected())
-        {
-            if (client.available())
-            {
-                // Read data from the ESP32
-                String line = client.readStringUntil('\r');
-                Serial.println(line);
-
-                // Send data to the Flutter app
-                client.println("Sending data to Flutter app");
-            }
-        }
-        client.stop();
-        Serial.println("Client Disconnected.");
-    }
+    delay(5000);
+    ws.textAll("teste");
 }
