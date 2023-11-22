@@ -1,8 +1,11 @@
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h>
 
-const char *ssid = "iPhone de vini (2)";
-const char *password = "123456789";
+const char *ssid = "BREGOLI";
+const char *password = "6b61746531323036";
+
+unsigned long lastHeartbeatTime = 0;
+const unsigned long heartbeatInterval = 1000; // Intervalo de 1 segundo 
 
 bool campainhaAtivada = false;
 const int botaoPin = 2; // Pino do botão (ajuste conforme necessário)
@@ -15,7 +18,6 @@ void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventTyp
     if (type == WS_EVT_CONNECT)
     {
         Serial.println("Cliente WebSocket conectado");
-        client->text("Conectado ao Sound Sense.");
     }
     else if (type == WS_EVT_DISCONNECT)
     {
@@ -25,12 +27,6 @@ void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventTyp
     {
         data[len] = 0;
         Serial.printf("Dados recebidos: %s\n", data);
-
-        if (strcmp((char *)data, "heartbeat") == 0)
-        {
-            // Envia uma resposta de heartbeat
-            client->text("heartbeat_ack");
-        }
     }
 }
 void setup()
@@ -58,17 +54,12 @@ void setup()
 
 void loop()
 {
-    // Verifica se o botão da campainha foi pressionado
-    bool botaoPressionado = digitalRead(botaoPin);
+    unsigned long currentTime = millis();
 
-    if (botaoPressionado && !campainhaAtivada)
+    // Verifique se o tempo desde o último heartbeat é maior que o intervalo desejado
+    if (currentTime - lastHeartbeatTime >= heartbeatInterval)
     {
-        campainhaAtivada = true;
-        Serial.println("Campainha pressionada");
-        ws.textAll("bell");
-    }
-    else if (!botaoPressionado)
-    {
-        campainhaAtivada = false;
+        ws.textAll("heartbeat");
+        lastHeartbeatTime = currentTime;
     }
 }
