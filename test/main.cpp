@@ -1,8 +1,8 @@
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h>
 
-const char *ssid = "BREGOLI";
-const char *password = "6b61746531323036";
+const char *ssid = "Redmi Note 11";
+const char *password = "123@gabriel";
 
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
@@ -36,6 +36,7 @@ void setup()
     {
         delay(1000);
         Serial.println("Conectando ao WiFi...");
+        Serial.println(WiFi.status());
     }
 
     Serial.println("Conectado ao WiFi");
@@ -50,5 +51,5 @@ void setup()
 void loop()
 {
     delay(5000);
-    ws.textAll("teste");
+    ws.textAll("bell");
 }
