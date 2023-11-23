@@ -2,13 +2,13 @@
 #include <ESPAsyncWebServer.h>
 
 const char *ssid = "BREGOLI";
-const char *password = "6b61746531323036";
+const char *password = "123456789";
 
 unsigned long lastHeartbeatTime = 0;
-const unsigned long heartbeatInterval = 1000; // Intervalo de 1 segundo 
+const unsigned long heartbeatInterval = 1000;
 
 bool campainhaAtivada = false;
-const int botaoPin = 2; // Pino do botão (ajuste conforme necessário)
+const int botaoPin = 2;
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 
@@ -32,7 +32,8 @@ void onWsEvent(AsyncWebSocket *server, AsyncWebSocketClient *client, AwsEventTyp
 void setup()
 {
     Serial.begin(9600);
-    pinMode(botaoPin, INPUT);
+    pinMode(botaoPin, OUTPUT);
+    digitalWrite(botaoPin, HIGH);
 
     WiFi.begin(ssid, password);
 
@@ -55,10 +56,18 @@ void setup()
 void loop()
 {
     unsigned long currentTime = millis();
+    int estadoPino = digitalRead(botaoPin);
+    if (estadoPino && !campainhaAtivada)
+    {
+        ws.textAll("campainha");
+        Serial.println("Mensagem enviada");
+        campainhaAtivada = true;
+    }
 
     // Verifique se o tempo desde o último heartbeat é maior que o intervalo desejado
     if (currentTime - lastHeartbeatTime >= heartbeatInterval)
     {
+        
         ws.textAll("heartbeat");
         lastHeartbeatTime = currentTime;
     }

@@ -8,12 +8,12 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/home/bregoli/Projects/soundsense-esp32/include",
-                "/home/bregoli/Projects/soundsense-esp32/src",
-                "/home/bregoli/Projects/soundsense-esp32/.pio/libdeps/esp32dev/ESPAsyncWebServer-esphome/src",
+                "/home/bregoli/Documents/PlatformIO/Projects/soundsense/include",
+                "/home/bregoli/Documents/PlatformIO/Projects/soundsense/src",
+                "/home/bregoli/Documents/PlatformIO/Projects/soundsense/.pio/libdeps/esp32dev/ESPAsyncWebServer-esphome/src",
                 "/home/bregoli/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "/home/bregoli/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
-                "/home/bregoli/Projects/soundsense-esp32/.pio/libdeps/esp32dev/AsyncTCP-esphome/src",
+                "/home/bregoli/Documents/PlatformIO/Projects/soundsense/.pio/libdeps/esp32dev/AsyncTCP-esphome/src",
                 "/home/bregoli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                 "/home/bregoli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                 "/home/bregoli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -240,12 +240,12 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/home/bregoli/Projects/soundsense-esp32/include",
-                    "/home/bregoli/Projects/soundsense-esp32/src",
-                    "/home/bregoli/Projects/soundsense-esp32/.pio/libdeps/esp32dev/ESPAsyncWebServer-esphome/src",
+                    "/home/bregoli/Documents/PlatformIO/Projects/soundsense/include",
+                    "/home/bregoli/Documents/PlatformIO/Projects/soundsense/src",
+                    "/home/bregoli/Documents/PlatformIO/Projects/soundsense/.pio/libdeps/esp32dev/ESPAsyncWebServer-esphome/src",
                     "/home/bregoli/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "/home/bregoli/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
-                    "/home/bregoli/Projects/soundsense-esp32/.pio/libdeps/esp32dev/AsyncTCP-esphome/src",
+                    "/home/bregoli/Documents/PlatformIO/Projects/soundsense/.pio/libdeps/esp32dev/AsyncTCP-esphome/src",
                     "/home/bregoli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/newlib/platform_include",
                     "/home/bregoli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include",
                     "/home/bregoli/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/esp_additions/freertos",
@@ -492,7 +492,7 @@
             ],
             "cStandard": "gnu99",
             "cppStandard": "gnu++11",
-            "compilerPath": "/home/bregoli/.platformio/packages/toolchain-xtensa-esp32@8.4.0+2021r2-patch5/bin/xtensa-esp32-elf-gcc",
+            "compilerPath": "/home/bregoli/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc",
             "compilerArgs": [
                 "-mlongcalls",
                 ""
