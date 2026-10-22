@@ -10,7 +10,7 @@ flowchart LR
 
 ## Boards
 
-- **`src/Esp 1.cpp`, doorbell**: connects to Wi-Fi and runs a WebSocket server on port 80 at `/ws`. It sends `heartbeat` to every client once per second and sends `campainha` once when GPIO 2 reads high.
+- **`src/Esp 1.cpp`, doorbell**: connects to Wi-Fi and runs a WebSocket server on port 80 at `/ws`. It sends `heartbeat` to every client once per second and sends `campainha` when GPIO 2 reads high. GPIO 2 is set as an output and driven high in `setup()`, and `campainhaAtivada` is never reset, so as written `campainha` is sent once per boot, on the first loop after Wi-Fi connects, not on a button press.
 - **`src/Esp2.cpp`, alert**: connects to Wi-Fi and runs an HTTP server on port 80. `GET /led` turns on the LED on GPIO 2 and answers `LED ligado`.
 
 Both boards print their IP address on the serial monitor (9600 baud) after connecting. The app needs those addresses in its `lib/devices.dart`.
